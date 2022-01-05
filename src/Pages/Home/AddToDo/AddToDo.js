@@ -15,16 +15,7 @@ const styles = {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat"
     },
-    googleStyle: {
-        background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,40,29,1) 50%, rgba(252,176,69,1) 100%)',
-        border: 0,
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-        color: 'white',
-        height: 48,
-        padding: '0 30px',
-        margin: "auto",
-        borderRadius: "50px",
-    },
+
     submitBtn: {
         background: 'linear-gradient(45deg, #27b1fc 30%, #57e2ff 90%)',
         border: 0,
@@ -122,7 +113,7 @@ const AddToDo = () => {
                         id="fullWidth"
                         required
                         type='date'
-                        name='date'
+                        name='deadLine'
                         onBlur={handleOnBlur}
                     />
 

@@ -16,7 +16,6 @@ import Typography from '@mui/material/Typography';
 import { Link, Outlet } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
-// import { NavLink, Outlet, Link } from 'react-router-dom';
 
 const drawerWidth = 250;
 
@@ -113,8 +112,7 @@ const Home = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-                        <Typography variant="h5" component="div">
-                            ToDo List
+                        <Typography style={{ fontSize: '2rem', fontWeight: '700' }}> Todo App
                         </Typography>
                     </Link>
 
