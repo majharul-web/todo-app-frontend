@@ -24,9 +24,7 @@ const styles = {
         margin: "auto",
         borderRadius: "50px",
     },
-};
-const useStyles = makeStyles({
-    root: {
+    submitBtn: {
         background: 'linear-gradient(45deg, #27b1fc 30%, #57e2ff 90%)',
         border: 0,
         borderRadius: 3,
@@ -37,11 +35,11 @@ const useStyles = makeStyles({
         width: "120px",
         margin: "auto",
     },
-});
+};
+
 
 
 const Login = () => {
-    const classes = useStyles();
 
     // all state
     const [email, setEmail] = useState('')
@@ -73,6 +71,7 @@ const Login = () => {
 
                 {/* form */}
                 <form onSubmit={handleSubmit}>
+
                     <TextField
                         label="Your Email"
                         placeholder="Type Email.."
@@ -90,7 +89,7 @@ const Login = () => {
                         onBlur={(e) => setPassword(e.target.value)}
                     />
                     {/* submit button */}
-                    <Button className={classes.root} sx={{ mt: 1 }} type="submit" variant="contained">Login</Button>
+                    <Button style={styles.submitBtn} sx={{ mt: 1 }} type="submit" variant="contained">Login</Button>
                 </form>
 
                 <Typography sx={{ textAlign: "center", my: 2 }}>

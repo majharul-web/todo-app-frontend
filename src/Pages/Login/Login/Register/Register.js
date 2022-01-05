@@ -25,9 +25,7 @@ const styles = {
         margin: "auto",
         borderRadius: "50px",
     },
-};
-const useStyles = makeStyles({
-    root: {
+    submitBtn: {
         background: 'linear-gradient(45deg, #27b1fc 30%, #57e2ff 90%)',
         border: 0,
         borderRadius: 3,
@@ -38,11 +36,11 @@ const useStyles = makeStyles({
         width: "120px",
         margin: "auto",
     },
-});
+};
+
 
 
 const Register = () => {
-    const classes = useStyles();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -101,7 +99,7 @@ const Register = () => {
                     />
 
                     {/* submit button */}
-                    <Button className={classes.root} sx={{ mt: 1 }} type="submit" variant="contained">Register</Button>
+                    <Button style={styles.submitBtn} sx={{ mt: 1 }} type="submit" variant="contained">Register</Button>
                 </form>
 
                 <Typography sx={{ textAlign: "center", my: 2 }}>----------OR----------</Typography>
