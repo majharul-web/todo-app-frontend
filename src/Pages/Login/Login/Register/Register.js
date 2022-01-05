@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { ImGooglePlus3 } from 'react-icons/im'
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 
 
@@ -50,13 +50,16 @@ const Register = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
+    // submit data
     const handleSubmit = (e) => {
         e.preventDefault()
         createUser(email, password, name)
-        if (success && !error.length) {
-            e.target.reset()
-        }
+
+        e.target.reset()
+
     }
+
+    // google login
     const handleGoogle = () => {
         googleSignIn(location, navigate)
     }

@@ -33,14 +33,7 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
-    ///get user name
-    const setUserName = (name) => {
-        updateProfile(auth.currentUser, {
-            displayName: `${name}`
-        })
-            .then(() => { })
-            .catch(error => { setError(error.message) })
-    }
+
 
     //create user by email & password
     const createUser = (email, password, name) => {
@@ -50,7 +43,15 @@ const useFirebase = () => {
                 setUser(result.user)
                 setError('')
                 setSuccess(true)
-                setUserName(name)
+
+                const newUser = { email, displayName: name }
+                setUser(newUser)
+                // update userName
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                }).then(() => {
+                }).catch((error) => {
+                });
             })
             .catch(error => {
                 setError(error.message)
