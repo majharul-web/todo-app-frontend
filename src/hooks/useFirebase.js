@@ -36,7 +36,7 @@ const useFirebase = () => {
 
 
     //create user by email & password
-    const createUser = (email, password, name) => {
+    const createUser = (email, password, name, navigate, location) => {
         setIsLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
@@ -52,6 +52,8 @@ const useFirebase = () => {
                 }).then(() => {
                 }).catch((error) => {
                 });
+
+                navigate(location.state?.from || '/')
             })
             .catch(error => {
                 setError(error.message)
@@ -75,18 +77,20 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
-    //get current user
+
+    // observe user
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, user => {
+        const unsubscribed = onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUser(user)
+                setUser(user);
             } else {
-                setUser({})
+                setUser({});
             }
-            setIsLoading(false)
-        })
-        return () => unSubscribe;
-    }, [])
+            setIsLoading(false);
+        });
+        return () => unsubscribed;
+    }, [auth]);
+
 
     //sing out user
     const singOutUser = () => {

@@ -53,7 +53,7 @@ const Register = () => {
     // submit data
     const handleSubmit = (e) => {
         e.preventDefault()
-        createUser(email, password, name)
+        createUser(email, password, name, navigate, location)
 
         e.target.reset()
 
