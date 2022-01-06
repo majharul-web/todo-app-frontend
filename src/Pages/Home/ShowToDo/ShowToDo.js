@@ -10,7 +10,7 @@ const ShowToDo = () => {
     const [isDeleted, setIsDeleted] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/todo/${user.email}`)
+        fetch(`https://tranquil-crag-67673.herokuapp.com/todo/${user.email}`)
             .then(res => res.json())
             .then(data => setTodos(data))
     }, [user.email, isDeleted]);
@@ -19,7 +19,7 @@ const ShowToDo = () => {
     const handleDelete = (id) => {
         const proceed = window.confirm('Are you sure to Delete');
         if (proceed) {
-            fetch(`http://localhost:5000/todo/delete/${id}`, {
+            fetch(`https://tranquil-crag-67673.herokuapp.com/todo/delete/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

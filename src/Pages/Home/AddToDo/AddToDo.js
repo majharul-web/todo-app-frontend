@@ -49,7 +49,7 @@ const AddToDo = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        axios.post('http://localhost:5000/addTodo', newToDoData)
+        axios.post('https://tranquil-crag-67673.herokuapp.com/addTodo', newToDoData)
             .then(res => {
                 const success = res.data.insertedId;
                 if (success) {

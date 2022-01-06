@@ -56,7 +56,7 @@ const UpdateModal = (props) => {
         e.preventDefault();
         console.log(newToDoData)
 
-        fetch(`http://localhost:5000/update/${_id}`, {
+        fetch(`https://tranquil-crag-67673.herokuapp.com/update/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
