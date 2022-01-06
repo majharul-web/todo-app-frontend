@@ -8,7 +8,6 @@ const ShowToDo = () => {
     const { user } = useAuth();
     const [todos, setTodos] = useState([]);
     const [isDeleted, setIsDeleted] = useState(null);
-    // const [isUpdated, setIsUpdated] = useState(null);
 
     useEffect(() => {
         fetch(`http://localhost:5000/todo/${user.email}`)

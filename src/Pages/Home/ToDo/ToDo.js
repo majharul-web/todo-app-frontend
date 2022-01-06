@@ -1,6 +1,7 @@
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import UpdateModal from '../UpdateModal/UpdateModal';
 
 const ToDo = (props) => {
     const styles = {
@@ -29,38 +30,54 @@ const ToDo = (props) => {
         }
     };
 
+    // modal event
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     // destructuring
     const { taskName, desc, deadLine, _id } = props.todo;
     const { handleDelete } = props;
 
 
     return (
-        <Grid item xs={4} sm={4} md={6} xl={4} sx={{ marginBottom: '40px' }}>
-            <Card sx={{ minWidth: 275, border: 0, boxShadow: 3 }}>
+        <>
+            <Grid item xs={4} sm={4} md={6} xl={4} sx={{ marginBottom: '40px' }}>
+                <Card sx={{ minWidth: 275, border: 0, boxShadow: 3 }}>
 
-                <CardContent>
-                    <Typography sx={{ textAlign: 'center', fontWeight: 'bold' }} gutterBottom>
-                        Task:{taskName}
-                    </Typography>
-                    <Typography sx={{ fontSize: 15, textAlign: 'center', color: '#F63E7B', fontWeight: 'bold' }} gutterBottom>
-                        Deadline: {deadLine}
-                    </Typography>
+                    <CardContent>
+                        <Typography sx={{ textAlign: 'center', fontWeight: 'bold' }} gutterBottom>
+                            Task:{taskName}
+                        </Typography>
+                        <Typography sx={{ fontSize: 15, textAlign: 'center', color: '#F63E7B', fontWeight: 'bold' }} gutterBottom>
+                            Deadline: {deadLine}
+                        </Typography>
 
-                    <Typography sx={{ fontSize: 14, mb: 1.5, textAlign: 'center' }} color="text.secondary">
-                        <span style={{ fontWeight: 'bold' }}>Description:</span> {desc}
-                    </Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <Box>
-                            <Button style={styles.updateBtn}>Update</Button>
+                        <Typography sx={{ fontSize: 14, mb: 1.5, textAlign: 'center' }} color="text.secondary">
+                            <span style={{ fontWeight: 'bold' }}>Description:</span> {desc}
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Box>
+                                <Button onClick={handleOpen} style={styles.updateBtn}>Update</Button>
+                            </Box>
+                            <Box>
+                                <Button onClick={() => handleDelete(_id)} style={styles.deleteBtn}>Delete</Button>
+                            </Box>
                         </Box>
-                        <Box>
-                            <Button onClick={() => handleDelete(_id)} style={styles.deleteBtn}>Delete</Button>
-                        </Box>
-                    </Box>
 
-                </CardContent>
-            </Card>
-        </Grid>
+                    </CardContent>
+                </Card>
+            </Grid>
+
+            {/* modal part */}
+            <UpdateModal
+                open={open}
+                handleClose={handleClose}
+                _id={_id}>
+                props={props?.todo}
+            </UpdateModal>
+
+        </>
     );
 };
 
