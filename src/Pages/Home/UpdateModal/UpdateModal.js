@@ -5,8 +5,9 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { TextField } from '@mui/material';
+import { Alert, TextField } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
+
 
 const style = {
     modalStyle: {
@@ -35,12 +36,12 @@ const style = {
 };
 
 const UpdateModal = (props) => {
+
     const { open, handleClose, children } = props;
     const { userName, userEmail, taskName, deadLine, desc, _id } = children[1];
-    // const { user } = useAuth();
-
-    const [newToDoData, setNewToDoData] = useState({});
-    const [success, setSuccess] = useState('');
+    const { toDoUpdate } = useAuth();
+    const [newToDoData, setNewToDoData, toDoUpdated] = useState({});
+    console.log(toDoUpdated)
 
     // get data from form
     const handleOnBlur = e => {
@@ -49,22 +50,16 @@ const UpdateModal = (props) => {
         newToDoData[field] = value;
         setNewToDoData(newToDoData);
 
+
     }
 
-    // send data backend
+    // send updated data to backend
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(newToDoData)
-
-        fetch(`https://tranquil-crag-67673.herokuapp.com/update/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            }
-            ,
-            body: JSON.stringify(newToDoData)
-        })
-            .then()
+        toDoUpdate(_id, newToDoData, e)
+        if (toDoUpdated) {
+            e.target.reset();
+        }
 
     }
 
@@ -84,9 +79,14 @@ const UpdateModal = (props) => {
             >
                 <Fade in={open}>
                     <Box sx={style.modalStyle}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Update Todo {userName}
-                        </Typography>
+                        {
+                            toDoUpdated ?
+                                <Alert sx={{ mt: 2 }} severity="Success">Successfully ToDo Updated</Alert>
+                                :
+                                <Typography id="transition-modal-title" variant="h6" component="h2">
+                                    Update Todo
+                                </Typography>
+                        }
 
 
                         {/* form */}

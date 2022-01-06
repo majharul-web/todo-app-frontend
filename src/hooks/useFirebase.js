@@ -8,10 +8,13 @@ const auth = getAuth()
 const googleProvider = new GoogleAuthProvider()
 
 const useFirebase = () => {
+    // all state
     const [user, setUser] = useState({})
     const [error, setError] = useState('')
     const [success, setSuccess] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [toDoUpdated, setToDoUpdated] = useState(false)
+    console.log(toDoUpdated)
 
 
 
@@ -106,6 +109,25 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+    // todo update
+    const toDoUpdate = (_id, newToDoData, e) => {
+        fetch(`https://tranquil-crag-67673.herokuapp.com/update/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            }
+            ,
+            body: JSON.stringify(newToDoData)
+        })
+            .then(res => {
+                console.log(res.status)
+                if (res?.status == 200) {
+                    alert('Todo Update success')
+                    setToDoUpdated(true)
+                }
+            })
+    }
+
 
 
 
@@ -119,6 +141,8 @@ const useFirebase = () => {
         createUser,
         signInUser,
         singOutUser,
+        toDoUpdate,
+        toDoUpdated
 
     }
 }
